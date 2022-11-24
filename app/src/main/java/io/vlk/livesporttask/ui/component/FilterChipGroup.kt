@@ -13,8 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import io.vlk.livesporttask.screens.search.model.FilterItem
+import io.vlk.livesporttask.ui.theme.PADDING_MINI
+import io.vlk.livesporttask.ui.theme.PADDING_SMALL
+import io.vlk.livesporttask.ui.theme.SHADOW_ELEVATION
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
@@ -47,8 +49,8 @@ fun Chip(
     onSelectionChanged: () -> Unit = {},
 ) {
     Surface(
-        modifier = Modifier.padding(2.dp),
-        shadowElevation = 4.dp,
+        modifier = Modifier.padding(PADDING_MINI),
+        shadowElevation = SHADOW_ELEVATION,
         shape = MaterialTheme.shapes.medium,
         color = if (isSelected) MaterialTheme.colorScheme.primary else Color.LightGray
     ) {
@@ -62,7 +64,7 @@ fun Chip(
                 text = name,
                 style = MaterialTheme.typography.labelSmall,
                 color = if (isSelected) MaterialTheme.colorScheme.onPrimary else Color.Black,
-                modifier = Modifier.padding(6.dp)
+                modifier = Modifier.padding(PADDING_SMALL)
             )
         }
     }

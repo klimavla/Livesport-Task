@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">LiveSport Task</string>
+    <string name="title">Výsledky</string>
     <string name="filter_all">Vše</string>
     <string name="filter_contest">Soutěže</string>
     <string name="filter_team">Týmy</string>
     <string name="filter_player_single">Jednotlivci</string>
     <string name="filter_player_team">Hráči v teamech</string>
+    <string name="search">Vyhledat</string>
+    <string name="player_image_description">Obrázek hráče</string>
+    <string name="search_clear_description">Vymazat vyhledávání</string>
 </resources>
