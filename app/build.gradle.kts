@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id ("com.google.dagger.hilt.android")
 }
 
 android {
@@ -45,9 +47,15 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 dependencies {
     implementation(libs.bundles.core)
     implementation(libs.bundles.compose)
+
+    kapt(libs.bundles.kapt)
 
     testImplementation(libs.bundles.test)
     androidTestImplementation(libs.bundles.test.android)

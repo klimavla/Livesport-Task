@@ -7,6 +7,8 @@ compose = "1.3.1"
 compose_activity = "1.6.1"
 compose_compiler = "1.3.2"
 compose_material3 = "1.0.1"
+hilt = "2.44"
+hilt_navigation = "1.0.0"
 junit = "4.13.2"
 junit_ext = "1.1.4"
 kotlin = "1.7.20"
@@ -34,6 +36,11 @@ androidx_core = { module = "androidx.core:core-ktx", version.ref = "androidx_cor
 #Kotlin
 kotlin_collections_immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlin_immutable" }
 
+#hilt
+hilt_android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt_compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+hilt_navigation = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt.navigation" }
+
 #Testing
 test_espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 test_junit = { module = "androidx.test.ext:junit", version.ref = "junit.ext" }
@@ -45,8 +52,9 @@ timber = { module = "com.jakewharton.timber:timber", version.ref = "timber"}
 
 [bundles]
 # Define bundles/groups of libraries
-compose = ["compose.ui", "compose.material", "compose_activity", "compose.tooling", "compose.tooling.preview", "compose.material3"]
-core = ["androidx.core", "timber", "kotlin.collections.immutable"]
+compose = ["compose.ui", "compose.material", "compose_activity", "compose.tooling", "compose.tooling.preview", "compose.material3", "hilt.navigation",]
+core = ["androidx.core", "timber", "kotlin.collections.immutable", "hilt.android"]
+kapt = ["hilt.compiler"]
 test = ["test.junit"]
 test_android = ["test.espresso", "test.junit.compose", "test.junit.ext"]
 test_debug = ["compose.ui.tooling", "compose.ui.test"]
@@ -56,3 +64,4 @@ kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 android_app = { id = "com.android.application", version.ref = "android_gradle_plugin" }
 android_lib = { id = "com.android.library", version.ref = "android_gradle_plugin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
