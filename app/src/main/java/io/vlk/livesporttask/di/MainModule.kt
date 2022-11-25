@@ -43,6 +43,6 @@ object MainModule {
 
     @Singleton
     @Provides
-    fun providesRepository(service: ApiService) =
-        DataRepository(service = service)
+    fun providesRepository(service: ApiService, configuration: LocaleConfiguration) =
+        DataRepository(service = service, config = configuration)
 }
