@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -22,6 +24,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -29,7 +33,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import io.vlk.livesporttask.R
+import io.vlk.livesporttask.network.model.ResponsePlayer
 import io.vlk.livesporttask.screens.search.model.FilterItem
 import io.vlk.livesporttask.ui.component.FilterChipGroup
 import io.vlk.livesporttask.ui.theme.PADDING_NORMAL
@@ -38,6 +44,9 @@ import kotlinx.collections.immutable.persistentListOf
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen() {
+    val viewModel = hiltViewModel<SearchScreenViewModel>()
+    val screenDataState by viewModel.screenDataState.collectAsState(listOf())
+
     Scaffold(
         topBar = {
             TopAppBar(title = { Text(text = stringResource(id = R.string.title)) })
@@ -47,20 +56,25 @@ fun SearchScreen() {
             modifier = Modifier
                 .padding(padding)
                 .fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
+            color = MaterialTheme.colorScheme.background,
         ) {
-            SearchScreenContent()
+            SearchScreenContent(screenDataState)
         }
     }
 }
 
 @Composable
-private fun SearchScreenContent() {
+private fun SearchScreenContent(screenDataState: List<ResponsePlayer>) {
     Column(modifier = Modifier.padding(horizontal = PADDING_NORMAL)) {
         HeaderContent(
             changeSelection = {},
             onSearchChanged = {}
         )
+        LazyColumn {
+            items(screenDataState) { item ->
+                Text( text = item.name)
+            }
+        }
     }
 }
 
