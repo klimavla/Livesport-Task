@@ -59,6 +59,8 @@ dependencies {
     kapt(libs.bundles.kapt)
     ksp(libs.bundles.ksp)
 
+    detektPlugins(libs.bundles.detekt.plugins)
+
     testImplementation(libs.bundles.test)
     androidTestImplementation(libs.bundles.test.android)
     debugImplementation(libs.bundles.test.debug)

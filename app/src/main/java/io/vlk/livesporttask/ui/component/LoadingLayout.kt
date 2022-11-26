@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun LoadingLayout(modifier: Modifier = Modifier, isLoading: Boolean, content: @Composable () -> Unit) {
+fun LoadingLayout( isLoading: Boolean,modifier: Modifier = Modifier, content: @Composable () -> Unit = {}) {
     Box(modifier = modifier) {
         content()
 

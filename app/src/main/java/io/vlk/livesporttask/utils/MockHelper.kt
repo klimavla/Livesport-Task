@@ -6,6 +6,7 @@ import io.vlk.livesporttask.network.model.ResponsePlayer
 import io.vlk.livesporttask.network.model.Value
 import io.vlk.livesporttask.screens.search.model.Player
 
+@Suppress("StringLiteralDuplication")
 object MockHelper {
     val mockResponseList = listOf(
         ResponsePlayer(

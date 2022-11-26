@@ -77,8 +77,10 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchScreen() {
-    val viewModel = hiltViewModel<SearchScreenViewModel>()
+fun SearchScreen(
+    modifier: Modifier = Modifier,
+    viewModel: SearchScreenViewModel = hiltViewModel(),
+) {
     val screenDataState by viewModel.screenDataState.collectAsState(SearchScreenDataState())
 
     val retryMessage = stringResource(id = R.string.action_retry)

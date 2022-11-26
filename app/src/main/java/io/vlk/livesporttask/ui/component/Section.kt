@@ -10,11 +10,12 @@ import io.vlk.livesporttask.ui.theme.PADDING_SMALL
 
 
 @Composable
-fun Section(text: String) {
+fun Section(text: String, modifier: Modifier = Modifier) {
     Text(
         modifier = Modifier
             .padding(top = PADDING_SMALL)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .then(modifier),
         text = text,
         color = MaterialTheme.colorScheme.onBackground,
         style = MaterialTheme.typography.titleSmall

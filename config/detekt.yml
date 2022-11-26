@@ -1,0 +1,214 @@
+build:
+  maxIssues: 0
+  weights:
+    empty-blocks: 1
+    exceptions: 5
+    formatting: 2
+    naming: 1
+    performance: 1
+    potential-bugs: 5
+
+complexity:
+  ComplexCondition:
+    threshold: 5
+  ComplexMethod:
+    threshold: 30
+  LargeClass:
+    excludes: ["**/test*/**"]
+  LongMethod:
+    threshold: 100
+  LongParameterList:
+    active: false
+  NestedBlockDepth:
+    active: false
+    threshold: 5
+  StringLiteralDuplication:
+    active: true
+    threshold: 2
+    excludes: ["**/test*/**", "**/androidTest/**"]
+  TooManyFunctions:
+    active: false
+
+coroutines:
+  GlobalCoroutineUsage:
+    active: true
+  InjectDispatcher:
+    active: true
+  RedundantSuspendModifier:
+    active: true
+  SleepInsteadOfDelay:
+    active: true
+  SuspendFunWithCoroutineScopeReceiver:
+    active: true
+  SuspendFunWithFlowReturnType:
+    active: true
+
+empty-blocks:
+  EmptyFunctionBlock:
+    ignoreOverridden: true
+
+exceptions:
+  ExceptionRaisedInUnexpectedLocation:
+    active: true
+  InstanceOfCheckForException:
+    active: true
+  PrintStackTrace:
+    active: true
+  RethrowCaughtException:
+    active: true
+  ReturnFromFinally:
+    active: true
+  SwallowedException:
+    active: true
+  ThrowingExceptionFromFinally:
+    active: true
+  ThrowingExceptionInMain:
+    active: true
+  ThrowingExceptionsWithoutMessageOrCause:
+    active: true
+  ThrowingNewInstanceOfSameException:
+    active: true
+  TooGenericExceptionCaught:
+    active: false
+
+naming:
+  ConstructorParameterNaming:
+    active: false
+  EnumNaming:
+    active: false
+  FunctionNaming:
+    ignoreAnnotated: ["Composable"]
+    excludes: ["**/test*/**", "**/androidTest/**"]
+  InvalidPackageDeclaration:
+    active: true
+    excludes: ["**/*.kts", "**/test*/**"]
+  MatchingDeclarationName:
+    active: false
+  PackageNaming:
+    packagePattern: '^[a-z]+(\.[a-z][A-Za-z0-9_]*)*$'
+  TopLevelPropertyNaming:
+    constantPattern: "[A-Za-z][_A-Za-z0-9]*"
+  VariableNaming:
+    excludes: ["**/test*/**", "**/androidTest/**"]
+
+performance:
+  SpreadOperator:
+    active: false # very high performance penalty
+
+potential-bugs:
+  Deprecation:
+    active: true
+  HasPlatformType:
+    active: true
+  ImplicitDefaultLocale:
+    active: false
+  MapGetWithNotNullAssertionOperator:
+    active: true
+  NullableToStringCall:
+    active: true
+  NullCheckOnMutableProperty:
+    active: true
+  UnconditionalJumpStatementInLoop:
+    active: true
+  UnnecessaryNotNullOperator:
+    active: true
+  UnnecessarySafeCall:
+    active: true
+  UnsafeCast:
+    active: true
+  UselessPostfixExpression:
+    active: true
+
+style:
+  CanBeNonNullable:
+    active: true
+  EqualsOnSignatureLine:
+    active: true
+  ForbiddenComment:
+    active: false
+  ForbiddenImport:
+    active: true
+  ForbiddenMethodCall:
+    active: true
+  FunctionOnlyReturningConstant:
+    excludes: ["**/test*/**", "**/androidTest/**"]
+  MagicNumber:
+    ignoreNumbers: ['-1','0','1','2','3','4','5','6','7','8','9','10','60','100','1000']
+    ignoreHashCodeFunction: false
+    excludes: ["**/test*/**", "**/androidTest/**"]
+  MaxLineLength:
+    excludes: ["**/test*/**", "**/androidTest/**"]
+  NestedClassesVisibility:
+    active: true
+  NewLineAtEndOfFile:
+    active: false
+  NoTabs:
+    active: true
+  RedundantVisibilityModifierRule:
+    active: true
+  ReturnCount:
+    max: 8
+  SerialVersionUIDInSerializableClass:
+    active: false
+  TrailingWhitespace:
+    active: true
+    excludes: "**/buildSrc/**"
+  # complains about abstract classes that implement interfaces
+  UnnecessaryAbstractClass:
+    active: false
+  UnnecessaryAnnotationUseSiteTarget:
+    active: true
+  UnnecessaryApply:
+    active: true
+  UnnecessaryInnerClass:
+    active: true
+  UnnecessaryLet:
+    active: true
+  UnnecessaryParentheses:
+    active: true
+  UnusedImports:
+    active: true
+  UnusedPrivateMember:
+    active: false
+  UseDataClass:
+    active: true
+  VarCouldBeVal:
+    active: true
+
+TwitterCompose:
+  #  CompositionLocalAllowlist:
+  #    active: true
+  # You can optionally define a list of CompositionLocals that are allowed here
+  # allowedCompositionLocals: LocalSomething,LocalSomethingElse
+  #  CompositionLocalNaming:
+  #    active: true
+  ContentEmitterReturningValues:
+    active: true
+    # You can optionally add your own composables here
+    # contentEmitters: MyComposable,MyOtherComposable
+  ModifierComposable:
+    active: true
+  ModifierMissing:
+    active: true
+  ModifierReused:
+    active: true
+  ModifierWithoutDefault:
+    active: true
+  MultipleEmitters:
+    active: true
+    # You can optionally add your own composables here
+    # contentEmitters: MyComposable,MyOtherComposable
+  MutableParams:
+    active: true
+  ComposableNaming:
+    active: true
+  ComposableParamOrder:
+    active: true
+  PreviewPublic:
+    active: true
+  RememberMissing:
+    active: true
+  ViewModelForwarding:
+    active: true
+  ViewModelInjection:
+    active: true
