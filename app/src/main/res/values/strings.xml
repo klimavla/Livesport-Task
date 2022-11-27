@@ -12,4 +12,5 @@
     <string name="search">Vyhledat</string>
     <string name="player_image_description">Obrázek hráče</string>
     <string name="search_clear_description">Vymazat vyhledávání</string>
+    <string name="back_description">Zpět</string>
 </resources>

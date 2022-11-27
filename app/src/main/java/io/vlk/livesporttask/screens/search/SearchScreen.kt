@@ -3,6 +3,7 @@ package io.vlk.livesporttask.screens.search
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -39,6 +40,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -49,13 +52,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import io.vlk.livesporttask.R
+import io.vlk.livesporttask.screens.destinations.DetailScreenDestination
 import io.vlk.livesporttask.screens.search.model.FilterItem
 import io.vlk.livesporttask.screens.search.model.ListData
 import io.vlk.livesporttask.screens.search.model.Player
@@ -76,8 +82,11 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
+@RootNavGraph(start = true)
+@Destination
 @Composable
 fun SearchScreen(
+    navigator: DestinationsNavigator,
     modifier: Modifier = Modifier,
     viewModel: SearchScreenViewModel = hiltViewModel(),
 ) {
@@ -113,12 +122,13 @@ fun SearchScreen(
                 modifier = Modifier
                     .padding(padding)
                     .fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
+                color = MaterialTheme.colorScheme.background,
             ) {
                 SearchScreenContent(
                     screenDataState = screenDataState,
                     changeSelection = viewModel::changeSelection,
-                    onSearchChanged = viewModel::onSearchChanged
+                    onSearchChanged = viewModel::onSearchChanged,
+                    onItemClick = { player -> navigator.navigate(DetailScreenDestination(player = player)) },
                 )
             }
         }
@@ -132,6 +142,7 @@ private fun SearchScreenContent(
     screenDataState: SearchScreenDataState,
     changeSelection: (FilterItem) -> Unit,
     onSearchChanged: (String) -> Unit,
+    onItemClick: (Player) -> Unit,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     Column(modifier = Modifier.padding(horizontal = PADDING_NORMAL)) {
@@ -141,7 +152,7 @@ private fun SearchScreenContent(
             onSearchChanged = { text ->
                 keyboardController?.hide()
                 onSearchChanged(text)
-            }
+            },
         )
 
         if (screenDataState.items.isEmpty()) {
@@ -158,6 +169,7 @@ private fun SearchScreenContent(
                             player = item.data,
                             isFirst = item.data.beforeSection(screenDataState.getItem(index - 1)),
                             isLast = item.data.afterSection(screenDataState.getItem(index + 1)),
+                            onItemClick = onItemClick,
                         )
                         is ListData.Section -> Section(text = item.title)
                     }
@@ -174,19 +186,19 @@ private fun HeaderPart(
     changeSelection: (FilterItem) -> Unit,
     onSearchChanged: (String) -> Unit,
 ) {
-    val textState = remember { mutableStateOf(TextFieldValue()) }
+    var inputText by rememberSaveable { mutableStateOf("") }
 
     Column {
         Row {
             TextField(
                 modifier = Modifier.weight(1f),
-                value = textState.value,
+                value = inputText,
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Search,
                 ),
-                keyboardActions = KeyboardActions(onSearch = { onSearchChanged(textState.value.text) }),
+                keyboardActions = KeyboardActions(onSearch = { onSearchChanged(inputText) }),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Search,
@@ -196,8 +208,8 @@ private fun HeaderPart(
                 trailingIcon = {
                     IconButton(
                         onClick = {
-                            textState.value = TextFieldValue()
-                            onSearchChanged(textState.value.text)
+                            inputText = ""
+                            onSearchChanged(inputText)
                         }
                     ) {
                         Icon(
@@ -206,10 +218,10 @@ private fun HeaderPart(
                         )
                     }
                 },
-                onValueChange = { textState.value = it }
+                onValueChange = { inputText = it },
             )
             Spacer(modifier = Modifier.width(PADDING_NORMAL))
-            Button(onClick = { onSearchChanged(textState.value.text) }) {
+            Button(onClick = { onSearchChanged(inputText) }) {
                 Text(
                     text = stringResource(id = R.string.search),
                     style = MaterialTheme.typography.labelLarge,
@@ -226,10 +238,17 @@ private fun HeaderPart(
 }
 
 @Composable
-private fun PlayerItem(player: Player, isFirst: Boolean, isLast: Boolean) {
+private fun PlayerItem(
+    player: Player,
+    isFirst: Boolean,
+    isLast: Boolean,
+    onItemClick: (Player) -> Unit,
+) {
     Surface(
         color = MaterialTheme.colorScheme.surfaceVariant,
-        modifier = Modifier.clipToRoundedShape(isFirst, isLast),
+        modifier = Modifier
+            .clipToRoundedShape(isFirst, isLast)
+            .clickable { onItemClick(player) },
     ) {
         Row(
             modifier = Modifier
@@ -257,12 +276,12 @@ private fun PlayerItem(player: Player, isFirst: Boolean, isLast: Boolean) {
                 Text(
                     text = player.name,
                     style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
                 Text(
                     text = player.defaultCountry,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
             }
         }
@@ -277,7 +296,8 @@ private fun ScreenContentPreview() {
         SearchScreenContent(
             screenDataState = SearchScreenDataState(items = mockList.toListData()),
             changeSelection = {},
-            onSearchChanged = {}
+            onSearchChanged = {},
+            onItemClick = {},
         )
     }
 }
