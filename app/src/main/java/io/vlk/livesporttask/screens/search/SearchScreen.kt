@@ -198,6 +198,7 @@ private fun HeaderPart(
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Search,
                 ),
+                placeholder = { Text(text = stringResource(id = R.string.search_placeholder)) },
                 keyboardActions = KeyboardActions(onSearch = { onSearchChanged(inputText) }),
                 leadingIcon = {
                     Icon(

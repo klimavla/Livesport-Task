@@ -5,12 +5,12 @@
     <string name="filter_contest">Soutěže</string>
     <string name="filter_team">Týmy</string>
     <string name="filter_player_single">Jednotlivci</string>
-    <string name="filter_player_team">Hráči v teamech</string>
-    <string name="message_error">Hráči v teamech</string>
+    <string name="filter_player_team">Hráči v týmech</string>
     <string name="action_retry">Obnovit</string>
     <string name="empty_data">Žádné výsledky pro vyhledávání</string>
     <string name="search">Vyhledat</string>
     <string name="player_image_description">Obrázek hráče</string>
     <string name="search_clear_description">Vymazat vyhledávání</string>
+    <string name="search_placeholder">Vyhledávání</string>
     <string name="back_description">Zpět</string>
 </resources>

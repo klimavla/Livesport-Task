@@ -1,0 +1,12 @@
+appId: io.vlk.livesporttask
+---
+- launchApp
+- tapOn: Search text
+- inputText: "Djo"
+- tapOn: Search
+- tapOn: Despotovic Djordje
+- back
+- tapOn: Djo
+- eraseText
+- tapOn: Search
+- assertVisible: No results for given search

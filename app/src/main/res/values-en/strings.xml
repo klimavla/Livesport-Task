@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">LiveSport Task</string>
+    <string name="title">Results</string>
+    <string name="filter_all">All</string>
+    <string name="filter_contest">Contests</string>
+    <string name="filter_team">Teams</string>
+    <string name="filter_player_single">Individuals</string>
+    <string name="filter_player_team">Players in teams</string>
+    <string name="action_retry">Retry</string>
+    <string name="empty_data">No results for given search</string>
+    <string name="search">Search</string>
+    <string name="player_image_description">Player Image</string>
+    <string name="search_clear_description">Clear search</string>
+    <string name="search_placeholder">Search text</string>
+    <string name="back_description">Back</string>
+</resources>

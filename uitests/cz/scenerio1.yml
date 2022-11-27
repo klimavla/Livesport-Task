@@ -1,0 +1,12 @@
+appId: io.vlk.livesporttask
+---
+- launchApp
+- tapOn: Vyhledávání
+- inputText: "Djo"
+- tapOn: Vyhledat
+- tapOn: Despotovic Djordje
+- back
+- tapOn: Djo
+- eraseText
+- tapOn: Vyhledat
+- assertVisible: Žádné výsledky pro vyhledávání
