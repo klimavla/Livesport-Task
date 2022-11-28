@@ -17,11 +17,14 @@ hilt_navigation = "1.0.0"
 junit = "4.13.2"
 junit_ext = "1.1.4"
 kotlin = "1.7.20"
+kotlin_coroutine_test = "1.6.4"
 kotlin_immutable = "0.3.5"
 ksp = "1.7.20-1.0.8"
+mockk = "1.13.2"
 moshi = "1.14.0"
 retrofit = "2.9.0"
 timber = "5.0.1"
+turbine = "0.12.1"
 
 [libraries]
 # Project
@@ -38,8 +41,8 @@ compose_activity = { module = "androidx.activity:activity-compose", version.ref 
 compose_ui_tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose_ui_test = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
 compose_coil = { module = "io.coil-kt:coil-compose", version.ref = "compose.coil" }
-compose_destinations = {module = "io.github.raamcosta.compose-destinations:core", version.ref = "compose.destinations"}
-compose_destinations_ksp = {module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "compose.destinations"}
+compose_destinations = { module = "io.github.raamcosta.compose-destinations:core", version.ref = "compose.destinations" }
+compose_destinations_ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "compose.destinations" }
 
 #Android x libs
 androidx_core = { module = "androidx.core:core-ktx", version.ref = "androidx_core" }
@@ -65,22 +68,28 @@ test_espresso = { module = "androidx.test.espresso:espresso-core", version.ref =
 test_junit = { module = "androidx.test.ext:junit", version.ref = "junit.ext" }
 test_junit_compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
 test_junit_ext = { module = "junit:junit", version.ref = "junit" }
+test_coroutine = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlin.coroutine.test" }
+test_coroutine_core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin.coroutine.test" }
+test_mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+test_mockk_jvm = { module = "io.mockk:mockk", version.ref = "mockk" }
+test_turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+
 
 #Static analysis
 compose_rules = { module = "com.twitter.compose.rules:detekt", version.ref = "detekt.compose" }
-detekt_cli = { group = "io.gitlab.arturbosch.detekt",name ="detekt-cli", version.ref = "detekt" }
+detekt_cli = { group = "io.gitlab.arturbosch.detekt", name = "detekt-cli", version.ref = "detekt" }
 detekt_formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 
 #other
-timber = { module = "com.jakewharton.timber:timber", version.ref = "timber"}
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 [bundles]
 # Define bundles/groups of libraries
 compose = ["compose.ui", "compose.material", "compose_activity", "compose.tooling", "compose.tooling.preview", "compose.material3", "hilt.navigation", "compose.coil", "compose.destinations"]
-core = ["androidx.core", "timber", "kotlin.collections.immutable", "hilt.android", "retrofit", "retrofit.converter", "moshi", "moshi.kotlin","androidx.lifecycle"]
+core = ["androidx.core", "timber", "kotlin.collections.immutable", "hilt.android", "retrofit", "retrofit.converter", "moshi", "moshi.kotlin", "androidx.lifecycle"]
 kapt = ["hilt.compiler"]
 ksp = ["moshi.codegen", "compose.destinations.ksp"]
-test = ["test.junit"]
+test = ["test.junit", "test.turbine", "test.mockk", "test.mockk.jvm", "test.coroutine", "test.coroutine.core"]
 test_android = ["test.espresso", "test.junit.compose", "test.junit.ext"]
 test_debug = ["compose.ui.tooling", "compose.ui.test"]
 detekt_plugins = ["compose.rules", "detekt.formatting"]
@@ -92,4 +101,4 @@ android_app = { id = "com.android.application", version.ref = "android_gradle_pl
 android_lib = { id = "com.android.library", version.ref = "android_gradle_plugin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt"}
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

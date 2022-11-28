@@ -21,7 +21,6 @@ class SearchScreenViewModel @Inject constructor(private val repository: DataRepo
 
     init {
         viewModelScope.launch {
-            repository.searchData()
             repository.playerState.collect { playerList ->
                 val screenData = _screenDataState.value
                 when (playerList) {
