@@ -47,6 +47,7 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    buildToolsVersion = "33.0.0"
     applicationVariants.all {
         kotlin.sourceSets {
             getByName(name) {
